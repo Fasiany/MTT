@@ -16,7 +16,7 @@
 
 其他东西是前置，放在同一目录就行。audio_slicer修改自[openvpi的audio_slicer](https://github.com/openvpi/audio-slicer)
 
-#环境配置
+# 环境配置
 
 下文假定已配置完毕虚拟环境
 
