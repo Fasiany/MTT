@@ -1,0 +1,5 @@
+requests
+ass
+librosa
+soundfile
+numpy
