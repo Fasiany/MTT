@@ -40,6 +40,8 @@
 
 # 一些注意事项
 
+字幕烧写需要ffmpeg
+
 使用前在运行目录下创建clips和srt目录，`pre_translation.py`的翻译识别结果将输出至srt目录
 
 `pre_translation.py`会在运行目录下产生大量临时srt, vtt, json, txt文件，可用命令快速删除
