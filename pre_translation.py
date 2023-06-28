@@ -106,8 +106,8 @@ def ms_to_srt_timestamp(ms):
 
 
 # 百度翻译api信息填在这里
-ID = 20230409001635057
-KEY = "uGwHlJA5mn9FfBRi3Akf"
+ID = 00000000000000000
+KEY = ""
 
 print("即将使用whisper模型", MODEL, "，如需更改请编辑源代码MODEL变量")
 lan = "Japanese"  # 设置为Auto以自动识别语言
