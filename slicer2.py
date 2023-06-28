@@ -128,11 +128,11 @@ class Slicer:
             sil_tags.append((pos, total_frames + 1))
         # Apply and return slices.
         if len(sil_tags) == 0:
-            return [waveform]
+            return (([waveform], (0, total_frames*10)), )
         else:
             chunks = []
             if sil_tags[0][0] > 0:
-                chunks.append(self._apply_slice(waveform, 0, sil_tags[0][0]))
+                chunks.append((self._apply_slice(waveform, 0, sil_tags[0][0]), (0, sil_tags[0][0] * 10)))
             for i in range(len(sil_tags) - 1):
                 chunks.append((self._apply_slice(waveform, sil_tags[i][1], sil_tags[i + 1][0]), (sil_tags[i][1]*10, sil_tags[i+1][0]*10)))
                 # print(f"Export chunks:{sil_tags[i][1]} {sil_tags[i + 1][0]}")
