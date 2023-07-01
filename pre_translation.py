@@ -40,7 +40,6 @@ RUN_WHISPER = True  # 仅供调试使用
         large-v2	1550 M	    N/A	                        large-v2	         ~10 GB	        1x
 """
 
-MODEL = "large-v2"
 ARGS_GENERAL = {
     "threshold": -40,
     "min_length": 5000,
@@ -105,17 +104,18 @@ def ms_to_srt_timestamp(ms):
     return f"{hours}:{minutes}:{seconds},{ms}"
 
 
+MODEL = "medium"
 # 百度翻译api信息填在这里
 ID = 00000000000000000
 KEY = ""
 
 print("即将使用whisper模型", MODEL, "，如需更改请编辑源代码MODEL变量")
 lan = "Japanese"  # 设置为Auto以自动识别语言
-fl_r = input("音频地址：").replace('"', "")
-video_s = input("生肉视频地址：").replace('"', "")
+fl_r = input("待翻译文件地址：").replace('"', "")
+video_s = input("原生肉视频地址：").replace('"', "")
 video_d = input("预翻译输出地址：").replace('"', "")
 rt = 5 if input("是否以扩充参数集运行?(输入y以使用扩充参数集)").lower() == "y" else 2
-print("正在加载模型：", MODEL, "，语言：", lan)
+print("正在加载模型：", MODEL, "，识别语言参数：", lan)
 model = whisper.load_model(MODEL)
 
 
@@ -132,7 +132,9 @@ def run(file_r, video_src, video_dst, slicing_args, burn=False, folder_name=None
     for root, dirs, files in os.walk(file_r):
         files = list(files)
         fln = len(files)
-        fln += 1
+        if not fln:
+            print("无文件可供识别!")
+            fln += 1
         for ct, file in enumerate(files):
             print("\b" * 114 + "处理进度:" + str(round(ct / fln * 100, 2)) + "%" + f", {ct}/{fln - 1}", end="")
             sys.stdout.flush()
@@ -232,6 +234,13 @@ def run(file_r, video_src, video_dst, slicing_args, burn=False, folder_name=None
     print("字幕文件已写入srt目录以供参考")
 
 
+if not fl_r.endswith(".wav"):
+    print("非wav格式文件作为输入，正在执行转换")
+    try:
+        subprocess.run(f'ffmpeg -i "{fl_r}" -f wav -y "{".".join(fl_r.split(".")[0:-1]) + ".wav"}"')
+    except Exception as err:
+        print("转换时出错：", str(err))
+    fl_r = ".".join(fl_r.split(".")[0:-1]) + ".wav"
 raw_fl_r = fl_r
 srt_folder = raw_fl_r.split(os.path.sep)[-1].split(".")[0]
 sp = os.path.sep
