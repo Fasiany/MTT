@@ -1,5 +1,7 @@
 # MTT
 
+> update 7/1:pre_translation.py现在将自动转换输入的非wav格式文件
+>
 > update 6/28:pre_translation.py不再产生一大堆垃圾，并且逻辑已修改，不会再做出把同一个音频的字幕文件输出到不同的文件夹之类的愚蠢行为，部分内容出错不影响全局内容输出
 > 
 > 现在pre_translation.py在烧录字幕前会尝试先运行ass_conversion中的转换逻辑
@@ -8,7 +10,7 @@
 
 一些平时用来加快翻译进程的小玩意儿，主要文件：
 
-`pre_translation.py` 音频识别+字幕识别+翻译功能的整合。识别功能要求安装whisper。虽然输入可以是任何可被ffmpeg读取并转换为wav的媒体格式，但为了最大程度提高输出质量，请确保输入的音频文件是**已经Ultimate Vocal Remover处理后的**音频文件
+`pre_translation.py` 音频识别+字幕识别+翻译功能的整合。识别功能要求安装whisper。虽然输入可以是任何可被ffmpeg读取并转换为wav的媒体格式，但为了最大程度提高输出质量，请确保输入的文件是**已经Ultimate Vocal Remover处理后的**音频文件
 
 `srt_align.py` 给定一个srt目标时间戳和一个srt文件，计算srt文件第一条字幕与目标时间戳的偏移量并应用在文件中的每一条字幕上，输出文件为`[原文件名]_Aligned.srt`。一般用来复用之前的歌词字幕
 
