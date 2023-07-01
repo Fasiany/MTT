@@ -8,7 +8,7 @@
 
 一些平时用来加快翻译进程的小玩意儿，主要文件：
 
-`pre_translation.py` 音频识别+字幕识别+翻译功能的整合。识别功能要求安装whisper
+`pre_translation.py` 音频识别+字幕识别+翻译功能的整合。识别功能要求安装whisper。为了最大程度提高输出质量，请确保输入的音频文件是**已经Ultimate Vocal Remover处理后的**wav格式音频文件
 
 `srt_align.py` 给定一个srt目标时间戳和一个srt文件，计算srt文件第一条字幕与目标时间戳的偏移量并应用在文件中的每一条字幕上，输出文件为`[原文件名]_Aligned.srt`。一般用来复用之前的歌词字幕
 
