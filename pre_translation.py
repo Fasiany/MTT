@@ -104,7 +104,7 @@ def ms_to_srt_timestamp(ms):
     return f"{hours}:{minutes}:{seconds},{ms}"
 
 
-MODEL = "medium"
+MODEL = "large-v2"
 # 百度翻译api信息填在这里
 ID = 00000000000000000
 KEY = ""
@@ -220,7 +220,7 @@ def run(file_r, video_src, video_dst, slicing_args, burn=False, folder_name=None
     open(f".{sp}srt{sp}{folder_name}{sp}{fn}_trans.srt", "w", encoding="utf-8").write(
         "\n\n".join(pd))
     if RUN_ASS_CONVERSION:
-        run_conversion(f".{sp}srt{sp}{folder_name}{sp}{fn}_trans.srt")
+        run_conversion(f"{fn}_trans.srt")
         exec_fl = f"{fn}_trans.ass"
     else:
         print("警告：未能执行ass转换")
